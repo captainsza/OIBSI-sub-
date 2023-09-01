@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        #calculator {
+            width: 320px;
+            border-radius: 15px;
+            background-color: #333;
+            padding: 20px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        #display {
+            height: 60px;
+            font-size: 25px;
+            color: white;
+            background-color: #222;
+            border: none;
+            text-align: right;
+            padding-right: 10px;
+            border-radius: 5px;
+        }
+        
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .button {
+            flex: 1;
+            padding: 15px 0;
+            font-size: 20px;
+            color: white;
+            background-color: #555;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        
+        .button:hover {
+            background-color: #777;
+            transform: scale(1.05);
+        }
+        
+        #equal {
+            background-color: #007bff;
+            font-weight: bold;
+        }
+        
+        #equal:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calculator">
+        <input type="text" id="display" readonly>
+        <div class="button-row">
+            <div class="button" onclick="appendToDisplay('7')">7</div>
+            <div class="button" onclick="appendToDisplay('8')">8</div>
+            <div class="button" onclick="appendToDisplay('9')">9</div>
+            <div class="button" onclick="appendToDisplay('/')">/</div>
+        </div>
+        <div class="button-row">
+            <div class="button" onclick="appendToDisplay('4')">4</div>
+            <div class="button" onclick="appendToDisplay('5')">5</div>
+            <div class="button" onclick="appendToDisplay('6')">6</div>
+            <div class="button" onclick="appendToDisplay('*')">*</div>
+        </div>
+        <div class="button-row">
+            <div class="button" onclick="appendToDisplay('1')">1</div>
+            <div class="button" onclick="appendToDisplay('2')">2</div>
+            <div class="button" onclick="appendToDisplay('3')">3</div>
+            <div class="button" onclick="appendToDisplay('-')">-</div>
+        </div>
+        <div class="button-row">
+            <div class="button" onclick="appendToDisplay('0')">0</div>
+            <div class="button" onclick="appendToDisplay('.')">.</div>
+            <div class="button" onclick="clearDisplay()">C</div>
+            <div id="equal" class="button" onclick="calculateResult()">=</div>
+        </div>
+        <div class="button-row">
+            <div class="button" onclick="appendToDisplay('+')">+</div>
+            <div class="button" onclick="calculateSqrt()">√</div>
+            <div class="button" onclick="calculatePercentage()">%</div>
+        </div>
+    </div>
+
+    <script>
+        let currentInput = "";
+        let currentResult = 0;
+
+        function updateDisplay() {
+            document.getElementById("display").value = currentInput;
+        }
+
+        function appendToDisplay(value) {
+            currentInput += value;
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            currentInput = "";
+            updateDisplay();
+        }
+
+        function calculateResult() {
+            try {
+                currentResult = eval(currentInput);
+                currentInput = currentResult.toString();
+                updateDisplay();
+            } catch (error) {
+                currentInput = "Error";
+                updateDisplay();
+            }
+        }
+
+        function calculateSqrt() {
+            try {
+                currentResult = Math.sqrt(eval(currentInput));
+                currentInput = currentResult.toString();
+                updateDisplay();
+            } catch (error) {
+                currentInput = "Error";
+                updateDisplay();
+            }
+        }
+
+        function calculatePercentage() {
+            try {
+                currentResult = eval(currentInput) / 100;
+                currentInput = currentResult.toString();
+                updateDisplay();
+            } catch (error) {
+                currentInput = "Error";
+                updateDisplay();
+            }
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            if (key.match(/[0-9.+\-*/%=]|Enter/)) {
+                event.preventDefault();
+                if (key === 'Enter') {
+                    calculateResult();
+                } else if (key === '%') {
+                    calculatePercentage();
+                } else {
+                    appendToDisplay(key);
+                }
+            }
+        });
+    </script>
+    <footer>
+        <p>&copy; 2023 <a href="https://github.com/captainsza">Zaid Ahmad</a>. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

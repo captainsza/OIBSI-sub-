@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced To-Do App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+        
+        #container {
+            width: 400px;
+            margin: 50px auto;
+            text-align: left;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        #taskInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        button.add-button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        button.add-button:hover {
+            background-color: #218838;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            transition: background-color 0.2s ease-in-out;
+        }
+        
+        li:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .task-actions button {
+            margin-left: 5px;
+        }
+        
+        .completed {
+            text-decoration: line-through;
+            color: #6c757d;
+        }
+        
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+        
+        .clear-completed-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .clear-completed-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h2>Advanced To-Do App</h2>
+        <input type="text" id="taskInput" placeholder="Add a new task">
+        <button class="add-button" onclick="addTask()">Add Task</button>
+
+        <div id="pendingTasks">
+            <h3>Pending Tasks</h3>
+            <ul id="pendingList"></ul>
+        </div>
+
+        <div id="completedTasks">
+            <h3>Completed Tasks</h3>
+            <ul id="completedList"></ul>
+            <button class="clear-completed-button" onclick="clearCompletedTasks()">Clear Completed Tasks</button>
+        </div>
+    </div>
+
+    <script>
+        const pendingList = document.getElementById("pendingList");
+        const completedList = document.getElementById("completedList");
+
+        function addTask() {
+            const taskInput = document.getElementById("taskInput").value.trim();
+            if (taskInput === "") return;
+
+            const listItem = document.createElement("li");
+            const date = new Date();
+            listItem.innerHTML = `
+                <span>${taskInput}</span>
+                <span class="task-date">${date.toLocaleString()}</span>
+                <div class="task-actions">
+                    <button onclick="completeTask(this)">Complete</button>
+                    <button onclick="editTask(this)">Edit</button>
+                    <button class="delete-button" onclick="deleteTask(this)">Delete</button>
+                </div>
+            `;
+
+            pendingList.appendChild(listItem);
+            document.getElementById("taskInput").value = "";
+        }
+
+        function completeTask(button) {
+            const listItem = button.parentElement.parentElement;
+            const taskText = listItem.querySelector("span");
+
+            taskText.classList.add("completed");
+
+            const taskActions = listItem.querySelector(".task-actions");
+            taskActions.innerHTML = `
+                <button onclick="uncompleteTask(this)">Uncomplete</button>
+                <button onclick="editTask(this)">Edit</button>
+                <button class="delete-button" onclick="deleteTask(this)">Delete</button>
+            `;
+
+            completedList.appendChild(listItem);
+            pendingList.removeChild(listItem);
+        }
+
+        function uncompleteTask(button) {
+            const listItem = button.parentElement.parentElement;
+            const taskText = listItem.querySelector("span");
+
+            taskText.classList.remove("completed");
+
+            const taskActions = listItem.querySelector(".task-actions");
+            taskActions.innerHTML = `
+                <button onclick="completeTask(this)">Complete</button>
+                <button onclick="editTask(this)">Edit</button>
+                <button class="delete-button" onclick="deleteTask(this)">Delete</button>
+            `;
+
+            pendingList.appendChild(listItem);
+            completedList.removeChild(listItem);
+        }
+
+        function editTask(button) {
+            const listItem = button.parentElement.parentElement;
+            const taskText = listItem.querySelector("span");
+            const updatedTaskText = prompt("Edit task:", taskText.textContent);
+
+            if (updatedTaskText !== null && updatedTaskText.trim() !== "") {
+                taskText.textContent = updatedTaskText;
+            }
+        }
+
+        function deleteTask(button) {
+            const listItem = button.parentElement.parentElement;
+            const parentList = listItem.parentElement;
+            parentList.removeChild(listItem);
+        }
+
+        function clearCompletedTasks() {
+            const completedItems = completedList.querySelectorAll("li");
+            completedItems.forEach(item => {
+                completedList.removeChild(item);
+            });
+        }
+    </script>
+    <footer>
+        <p>&copy; 2023 <a href="https://github.com/captainsza">Zaid Ahmad</a>. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

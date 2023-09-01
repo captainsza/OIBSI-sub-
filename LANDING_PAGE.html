@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Landing Page</title>
+    <style>
+        /* Reset some default styles */
+        
+        body,
+        h1,
+        h2,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        /* Header Styles */
+        
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 48px;
+        }
+        
+        header p {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        /* Navigation Styles */
+        
+        nav {
+            background-color: #333;
+            text-align: center;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 18px;
+        }
+        /* Main Content Styles */
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .main-content {
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .main-content h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .main-content p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+        /* Feature Section Styles */
+        
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .feature h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .feature p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+        /* Testimonials Styles */
+        
+        .testimonials {
+            background-color: #f9f9f9;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .testimonial {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .testimonial p {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
+        }
+        /* Footer Styles */
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        footer p {
+            font-size: 16px;
+        }
+        /* Responsive Styles */
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 36px;
+            }
+            header p {
+                font-size: 18px;
+            }
+            nav a {
+                font-size: 16px;
+            }
+            .main-content h2 {
+                font-size: 30px;
+            }
+            .main-content p {
+                font-size: 16px;
+            }
+            .cta-button {
+                font-size: 16px;
+            }
+            .feature h3 {
+                font-size: 20px;
+            }
+            .feature p {
+                font-size: 14px;
+            }
+            .testimonial p {
+                font-size: 16px;
+            }
+            footer p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to Our Advanced Landing Page</h1>
+        <p>Discover the Best Products and Services</p>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <h2>Our Featured Products</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt tellus eu vehicula.</p>
+            <a href="#" class="cta-button">Learn More</a>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <h3>Feature 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="feature">
+                <h3>Feature 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="feature">
+                <h3>Feature 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonials">
+        <div class="testimonial">
+            <p>"Great service! I'm very satisfied with their products."</p>
+        </div>
+        <div class="testimonial">
+            <p>"This company delivers exceptional quality and value."</p>
+        </div>
+        <div class="testimonial">
+            <p>"Highly recommended! Excellent customer support."</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 <a href="https://github.com/captainsza">Zaid Ahmad</a>. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

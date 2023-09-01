@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        #container {
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            width: 350px;
+        }
+        
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+        
+        .conversion-mode {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        #result {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+        /* Dark theme */
+        
+        .dark-theme body {
+            background-color: #333;
+            color: #fff;
+        }
+        
+        .dark-theme #container {
+            background-color: #222;
+            color: #fff;
+        }
+        
+        .dark-theme input[type="number"],
+        .dark-theme select,
+        .dark-theme button {
+            background-color: #444;
+            color: #fff;
+            border: 1px solid #333;
+        }
+        
+        .dark-theme button:hover {
+            background-color: #007BFF;
+        }
+        /* Additional Styles */
+        
+        #history {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        #history h3 {
+            color: #007BFF;
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body class="light-theme">
+    <div id="container">
+        <h2>Temperature Converter</h2>
+        <input type="number" id="temperature" placeholder="Enter temperature" required>
+        <select id="unit">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+        </select>
+
+        <div class="conversion-mode">
+            <button id="celsiusBtn">Celsius</button>
+            <button id="fahrenheitBtn">Fahrenheit</button>
+            <button id="kelvinBtn">Kelvin</button>
+        </div>
+
+        <button id="convertBtn">Convert</button>
+        <div id="result"></div>
+
+        <label for="themeToggle">Dark Theme</label>
+        <input type="checkbox" id="themeToggle">
+
+        <div id="history">
+            <h3>Conversion History</h3>
+            <ul id="historyList">
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Store the current conversion mode
+        let currentConversionMode = "celsius";
+
+        // Conversion history
+        const historyList = document.getElementById("historyList");
+
+        // Update the conversion mode when buttons are clicked
+        document.getElementById("celsiusBtn").addEventListener("click", function() {
+            currentConversionMode = "celsius";
+        });
+
+        document.getElementById("fahrenheitBtn").addEventListener("click", function() {
+            currentConversionMode = "fahrenheit";
+        });
+
+        document.getElementById("kelvinBtn").addEventListener("click", function() {
+            currentConversionMode = "kelvin";
+        });
+
+        // Toggle dark theme
+        document.getElementById("themeToggle").addEventListener("change", function() {
+            const body = document.body;
+            body.classList.toggle("dark-theme");
+        });
+
+        document.getElementById("convertBtn").addEventListener("click", function() {
+            const temperatureInput = parseFloat(document.getElementById("temperature").value);
+            const unit = document.getElementById("unit").value;
+            let result = "";
+
+            if (!isNaN(temperatureInput)) {
+                if (unit === "celsius") {
+                    result = `${temperatureInput}°C is ${celsiusToFahrenheit(temperatureInput)}°F and ${celsiusToKelvin(temperatureInput)}K.`;
+                } else if (unit === "fahrenheit") {
+                    result = `${temperatureInput}°F is ${fahrenheitToCelsius(temperatureInput)}°C and ${fahrenheitToKelvin(temperatureInput)}K.`;
+                } else if (unit === "kelvin") {
+                    result = `${temperatureInput}K is ${kelvinToCelsius(temperatureInput)}°C and ${kelvinToFahrenheit(temperatureInput)}°F.`;
+                }
+
+                // Add the conversion to history
+                addToHistory(result);
+            } else {
+                result = "Please enter a valid temperature.";
+            }
+
+            document.getElementById("result").textContent = result;
+        });
+
+        // Add a conversion to history
+        function addToHistory(conversion) {
+            const listItem = document.createElement("li");
+            listItem.textContent = conversion;
+            historyList.appendChild(listItem);
+        }
+
+        // Temperature conversion functions
+        function celsiusToFahrenheit(celsius) {
+            return (celsius * 9 / 5) + 32;
+        }
+
+        function celsiusToKelvin(celsius) {
+            return celsius + 273.15;
+        }
+
+        function fahrenheitToCelsius(fahrenheit) {
+            return (fahrenheit - 32) * 5 / 9;
+        }
+
+        function fahrenheitToKelvin(fahrenheit) {
+            return (fahrenheit - 32) * 5 / 9 + 273.15;
+        }
+
+        function kelvinToCelsius(kelvin) {
+            return kelvin - 273.15;
+        }
+
+        function kelvinToFahrenheit(kelvin) {
+            return (kelvin - 273.15) * 9 / 5 + 32;
+        }
+    </script>
+    <footer>
+        <p>&copy; 2023 <a href="https://github.com/captainsza">Zaid Ahmad</a>. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

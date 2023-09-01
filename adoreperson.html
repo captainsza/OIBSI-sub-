@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikola Tesla</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        nav {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        #container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            font-size: 28px;
+            margin-top: 30px;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .timeline {
+            margin-top: 30px;
+            padding-left: 20px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 50%;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+        }
+        /* Quote Section */
+        
+        #quote {
+            margin-top: 30px;
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        #quote p {
+            font-style: italic;
+            font-size: 20px;
+        }
+        /* Inventions Gallery */
+        
+        #inventions {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .invention {
+            display: inline-block;
+            margin: 20px;
+        }
+        /* Legacy Section */
+        
+        #legacy {
+            margin-top: 30px;
+        }
+        
+        #legacy h3 {
+            font-size: 24px;
+        }
+        
+        #legacy ul {
+            list-style-type: square;
+            margin-left: 20px;
+        }
+        /* CSS Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .animated {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Nikola Tesla</h1>
+    </header>
+    <nav>
+        <a href="#biography">Biography</a>
+        <a href="#inventions">Inventions</a>
+        <a href="#legacy">Legacy</a>
+    </nav>
+    <div id="container">
+        <img src="nikola-tesla.jpg" alt="Nikola Tesla">
+        <h2 id="biography">Biography</h2>
+        <p>Nikola Tesla (1856–1943) was a Serbian-American inventor, electrical engineer, mechanical engineer, and futurist who made significant contributions to the development of the alternating current (AC) electrical system.</p>
+        <p>His work in AC power transmission and radio communication paved the way for many of the technological advances of the 20th century. Tesla held over 300 patents and is best known for his invention of the Tesla coil and contributions to the development
+            of the modern electric power system.</p>
+        <p>Tesla's groundbreaking ideas and inventions continue to influence science and technology to this day. He remains an iconic figure in the history of electrical engineering and innovation.</p>
+
+        <h2 id="inventions">Key Inventions</h2>
+        <div id="inventions" class="animated">
+            <div class="invention">
+                <img src="tesla-coil.jpg" alt="Tesla Coil">
+                <p><strong>Tesla Coil:</strong> Tesla's invention of the Tesla coil was fundamental in the development of wireless transmission of electricity and radio communication.</p>
+            </div>
+            <div class="invention">
+                <img src="ac-motor.jpg" alt="AC Motor">
+                <p><strong>AC Motor:</strong> Tesla's alternating current (AC) motor design revolutionized the power industry and remains widely used today.</p>
+            </div>
+            <div class="invention">
+                <img src="radio.jpg" alt="Radio">
+                <p><strong>Radio:</strong> Tesla made pioneering contributions to the development of radio technology, although credit is often given to others.</p>
+            </div>
+        </div>
+
+        <h2 id="legacy">Legacy</h2>
+        <div id="legacy" class="animated">
+            <h3>Tesla's Legacy Lives On</h3>
+            <p>Nikola Tesla's contributions to science and technology continue to shape our world:</p>
+            <ul>
+                <li>AC power transmission is the standard for electricity distribution worldwide.</li>
+                <li>His concepts inspired innovations in wireless communication and robotics.</li>
+                <li>The SI unit of magnetic flux density, the tesla (T), is named in his honor.</li>
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 <a href="https://github.com/captainsza">Zaid Ahmad</a>. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>
